@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BoulderScript : MonoBehaviour
 {
+    public Transform playerSpawn;
     public Vector3 startPos;
     Rigidbody rb;
     [Tooltip("Adjusts the thrust of the object.")]
@@ -13,6 +14,8 @@ public class BoulderScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //grab player spawn
+        playerSpawn = GameObject.Find("PlayerSpawn").transform;
         //Grab start position of object
         startPos = transform.position;
         //Use GetComponent to assign RigidBody
@@ -34,6 +37,17 @@ public class BoulderScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            //turns off character controller.
+            collision.gameObject.transform.parent.GetComponent<CharacterController>().enabled = false;
+            //teleports player to spawn position.
+            collision.gameObject.transform.parent.position = playerSpawn.position;
+            //turns character controller back on.
+            collision.gameObject.transform.parent.GetComponent<CharacterController>().enabled = true;
+            score.AddScore();
+        }
+
+        if (collision.gameObject.CompareTag("BoulderReset"))
+        {
             ResetBoulder();
         }
     }
@@ -42,6 +56,5 @@ public class BoulderScript : MonoBehaviour
     {
         transform.position = startPos;
         rb.velocity = Vector3.zero; //Vector3(0,0,0,);
-        score.AddScore();
     }
 }
