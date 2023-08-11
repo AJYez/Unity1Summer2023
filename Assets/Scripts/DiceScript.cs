@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class DiceScript : MonoBehaviour
 {
     public Transform throwPos;
     Rigidbody rb;
@@ -10,7 +10,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        throwPos = GameObject.Find("ThrowPoint").transform;
+        throwPos = GameObject.Find("Throw Point").transform;
         transform.rotation = Random.rotation;
         rb = GetComponent<Rigidbody>();
     }
@@ -24,6 +24,7 @@ public class NewBehaviourScript : MonoBehaviour
     private void OnMouseDown()
     {
         transform.position = throwPos.position;
-        rb.AddForce(new Vector3(Random.Range(-3, -7), 2, 0), ForceMode.Impulse);
+        rb.AddForce(new Vector3(Random.Range(-5, -8), 2, 0), ForceMode.Impulse);
+
     }
 }

@@ -21,7 +21,7 @@ public class MessageScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             messageBox.SetActive(false);
         }

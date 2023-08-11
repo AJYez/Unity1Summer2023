@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - BoulderReset
+  - Paddle
   layers:
   - Default
   - TransparentFX
