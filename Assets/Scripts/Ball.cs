@@ -14,8 +14,9 @@ public class Ball : MonoBehaviour
     [SerializeField]
     GameObject gameOverHud;
     public TimerScript clock;
-    public AudioClip sfx;
+    public AudioClip[] sfx;
     AudioSource soundSource;
+    public AudioClip endSound;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,11 @@ public class Ball : MonoBehaviour
     {
         if (transform.position.y < -10)
         {
+            if(!clock.isGameOver)
+            {
+                soundSource.PlayOneShot(endSound);
+            }
+
             clock.isGameOver = true;
             gameOverHud.SetActive(true);
             Cursor.visible = true;
@@ -57,7 +63,7 @@ public class Ball : MonoBehaviour
     {
         if(collision.gameObject.tag == "Paddle")
         {
-            soundSource.PlayOneShot(sfx);
+            soundSource.PlayOneShot(sfx[Random.Range(0, 2)]);
             score++;
             //update the score text.
             scoreTxt.text = $"Score: {score}";
